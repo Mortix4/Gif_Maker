@@ -1,0 +1,7 @@
+﻿  MainFunctions.c
+C:\opencv\build\include\opencv2\core\types_c.h(929,13): warning C4013: 'cvRound' undefined; assuming extern returning int
+  (compiling source file 'MainFunctions.c')
+  
+C:\ian\Projects\Gif_Maker\Gif_Maker\Gif_Maker\MainFunctions.c(15,8): warning C4477: 'scanf' : format string '%d' requires an argument of type 'int *', but variadic argument 1 has type 'int **'
+C:\ian\Projects\Gif_Maker\Gif_Maker\Gif_Maker\MainFunctions.c(17,2): warning C4047: 'return': 'int' differs in levels of indirection from 'int *'
+  Gif_Maker.vcxproj -> C:\ian\Projects\Gif_Maker\Gif_Maker\x64\Debug\Gif_Maker.exe
