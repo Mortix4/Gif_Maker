@@ -2,10 +2,4 @@
 C:\opencv\build\include\opencv2\core\types_c.h(929,13): warning C4013: 'cvRound' undefined; assuming extern returning int
   (compiling source file 'LinkedList.c')
   
-  MainFunctions.c
-C:\opencv\build\include\opencv2\core\types_c.h(929,13): warning C4013: 'cvRound' undefined; assuming extern returning int
-  (compiling source file 'MainFunctions.c')
-  
-C:\ian\Projects\Gif_Maker\Gif_Maker\Gif_Maker\MainFunctions.c(48,43): warning C4028: formal parameter 2 different from declaration
-  Generating Code...
   Gif_Maker.vcxproj -> C:\ian\Projects\Gif_Maker\Gif_Maker\x64\Debug\Gif_Maker.exe

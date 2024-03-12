@@ -28,17 +28,46 @@ int getOption()
 	return choice;
 }
 
-void handleSplashOption(int choice)
+void replaceForwardSlashes(char* str) 
+{
+    for (size_t i = 0; i < strlen(str); i++) 
+    {
+        if (str[i] == '/')
+            str[i] = '\\';
+    }
+}
+
+char* getPath()
+{
+    char path[LEN] = { 0 };
+    myFgets(path, LEN);
+    replaceForwardSlashes(path);
+
+    // Dynamically allocate memory for the path
+    char* dynamicPath = strdup(path);
+
+    if (dynamicPath == NULL)
+    {
+        // Handle memory allocation failure if needed
+        printf("Error: Memory allocation failed.\n");
+        exit(EXIT_FAILURE);
+    }
+
+    return dynamicPath;
+}
+
+void handleSplashOption(FrameNode** head, int choice)
 {
 	switch (choice)
 	{
 		case 0:
-			CreateProject();
+			CreateProject(head);
 			break;
 
 		case 1:
-			LoadProject();
+			LoadProject(head);
 			break;
+
 		default:
 			printf("Invalid Choice, Try Again!\n");
 			break;
@@ -50,49 +79,39 @@ void handleOption(int choice, FrameNode** head)
     switch (choice)
     {
     case 1:
-        add_new_frame(head);
-        if (*head != NULL)
-        {
-            FrameNode* tmp = *head;
-            printf("head Frame: %s - %s - %d\n", tmp->frame->name, tmp->frame->path, tmp->frame->duration);
-            while (tmp->next)
-            {
-                tmp = tmp->next;
-            }
-            printf("Added Frame: %s - %s - %d\n", tmp->frame->name, tmp->frame->path, tmp->frame->duration);
-        }
-        else
-        {
-            printf("Error: Frame not added successfully.\n");
-        }
+        add_new_frame(head);   
         break;
 
     case 2:
-        // Add logic for option 2
+        handleRemoveFrame(head);
         break;
 
     case 3:
-        // Add logic for option 3
+        handleChangeFrameIndex(head);
         break;
 
     case 4:
-        // Add logic for option 4
+    {
+        handleChangeFrameDuration(*head);
         break;
+    }
 
     case 5:
-        // Add logic for option 5
+    {
+        handleChangeAllFramesDuration(*head);
         break;
+    }    
 
     case 6:
         list_frames(*head);
         break;
 
     case 7:
-        // Add logic for option 7
+        play(*head);
         break;
 
     case 8:
-        // Add logic for option 8
+        SaveProject(*head);
         break;
 
     default:

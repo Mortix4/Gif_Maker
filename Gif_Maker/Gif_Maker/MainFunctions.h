@@ -10,7 +10,9 @@ void myFgets(char* str, int n);
 void printMenu();
 void printSplash();
 int getOption();
-void handleSplashOption(int choice);
-void handleOption(int choice, FrameNode* head);
+void replaceForwardSlashes(char* str);
+char* getPath();
+void handleSplashOption(FrameNode** head, int choice);
+void handleOption(int choice, FrameNode** head);
 
 #endif

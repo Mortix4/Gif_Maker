@@ -24,7 +24,7 @@ int main()
 		choice = getOption();
 		if (choice == 0 || choice == 1)
 		{
-			handleSplashOption(choice);
+			handleSplashOption(&head, choice);
 			break;
 		}
 	}
@@ -35,6 +35,7 @@ int main()
 		choice = getOption();
 		(choice == 0) ? running = false : handleOption(choice, &head);
 	}
+	printf("Bye!\n");
 	freeList(&head);
 	return 0;
 }

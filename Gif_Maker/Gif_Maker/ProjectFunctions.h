@@ -5,9 +5,11 @@
 #include "LinkedList.h"
 #include "MainFunctions.h"
 
-void CreateProject();
-void LoadProject();
-void SaveProject();
+typedef struct FrameNode FrameNode;
+
+void CreateProject(FrameNode** head);
+void LoadProject(FrameNode** head);
+void SaveProject(FrameNode* head);
 
 
 #endif
