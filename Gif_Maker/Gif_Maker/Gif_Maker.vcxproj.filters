@@ -24,6 +24,12 @@
     <ClCompile Include="MainFunctions.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="LinkedList.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectFunctions.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LinkedList.h">
@@ -33,6 +39,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MainFunctions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectFunctions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

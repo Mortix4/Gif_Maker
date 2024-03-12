@@ -132,13 +132,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="LinkedList.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="MainFunctions.c" />
+    <ClCompile Include="ProjectFunctions.c" />
     <ClCompile Include="view.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="MainFunctions.h" />
+    <ClInclude Include="ProjectFunctions.h" />
     <ClInclude Include="view.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
