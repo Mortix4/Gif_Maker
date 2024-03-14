@@ -168,8 +168,11 @@ void handleChangeFrameDuration(FrameNode* head)
 	char name[LEN] = { 0 };
 	int duration = 0;
 
-	printf("Enter New Duration For The Frame: ");
-	duration = getOption();
+	while (duration < 1)
+	{
+		printf("Enter New Duration For The Frame: ");
+		duration = getOption();
+	}
 
 	printf("Enter Name Of The Frame: ");
 	myFgets(name, LEN);
@@ -186,8 +189,12 @@ void handleChangeFrameDuration(FrameNode* head)
 // 5
 void handleChangeAllFramesDuration(FrameNode* head)
 {
-	printf("Enter Duration For All Frames: ");
-	int duration = getOption();
+	int duration = 0;
+	while (duration < 1)
+	{
+		printf("Enter Duration For All Frames: ");
+		int duration = getOption();
+	}
 	changeAllDuration(head, duration);
 }
 

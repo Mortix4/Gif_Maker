@@ -1,5 +1,5 @@
-﻿  LinkedList.c
+﻿  ProjectFunctions.c
 C:\opencv\build\include\opencv2\core\types_c.h(929,13): warning C4013: 'cvRound' undefined; assuming extern returning int
-  (compiling source file 'LinkedList.c')
+  (compiling source file 'ProjectFunctions.c')
   
   Gif_Maker.vcxproj -> C:\ian\Projects\Gif_Maker\Gif_Maker\x64\Debug\Gif_Maker.exe

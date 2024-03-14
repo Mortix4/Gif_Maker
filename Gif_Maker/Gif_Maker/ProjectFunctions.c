@@ -12,6 +12,7 @@ void CreateProject(FrameNode** head)
 
 void LoadProject(FrameNode** head)
 {
+    printf("Enter Path with the format (.txt): ");
     char* path = getPath();
 
     // Open the file for reading

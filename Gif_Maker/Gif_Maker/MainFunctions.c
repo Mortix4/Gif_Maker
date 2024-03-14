@@ -91,16 +91,12 @@ void handleOption(int choice, FrameNode** head)
         break;
 
     case 4:
-    {
         handleChangeFrameDuration(*head);
         break;
-    }
 
     case 5:
-    {
         handleChangeAllFramesDuration(*head);
         break;
-    }    
 
     case 6:
         list_frames(*head);
