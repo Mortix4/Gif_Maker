@@ -1,0 +1,28 @@
+# Visual Studio temporary files
+.vs/
+*.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Oo]bj/
+
+# Visual Studio files
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.vcxproj.vspscc
+*.vcproj
+*.csproj
+*.sln
+
+# CMake files
+CMakeLists.txt
+CMakeFiles/
