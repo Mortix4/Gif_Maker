@@ -38,7 +38,7 @@ FrameNode* createFrameNode(char* name, unsigned int duration, char* path)
 // 6
 void list_frames(FrameNode* head)
 {
-	printf("Name        Duration    Path\n");
+	printf("Name        Duration<ms>    Path\n");
 	printf("----------------------------------------\n");
 
 	if (head == NULL)
@@ -50,7 +50,7 @@ void list_frames(FrameNode* head)
 	{
 		if (tmp->frame)
 		{
-			printf("%-12s %-10d ms %s\n", tmp->frame->name, tmp->frame->duration, tmp->frame->path);
+			printf("%-12s %-14d %s\n", tmp->frame->name, tmp->frame->duration, tmp->frame->path);
 		}
 		else
 		{
@@ -135,16 +135,16 @@ FrameNode* findFrameNodeByName(FrameNode* head, char* name)
 
 FrameNode* findFrameNodeByIndex(FrameNode* head, int index)
 {
-	if (head == NULL || index < 1)
+	if (head == NULL)
 	{
-		printf("Head Is Empty Or Invalid Index!!\n");
+		printf("Head Is Empty!!\n");
 		return NULL;
 	}
 
-	int currentIndex = 0;
+	int currentIndex = 1;
 	FrameNode* current = head;
 
-	while (current != NULL)
+	while (current)
 	{
 		if (currentIndex == index)
 			return current;
@@ -251,7 +251,7 @@ void removeFrame(FrameNode** head, char* name)
 	}
 }
 
-//3
+// 3
 void handleChangeFrameIndex(FrameNode** head)
 {
 	char name[LEN] = { 0 };
@@ -267,7 +267,7 @@ void handleChangeFrameIndex(FrameNode** head)
 		return;
 	}
 
-	printf("Enter The new index in the movie you wish to place the frame: ");
+	printf("Enter The new index in the movie you wish to place the frame in: ");
 	while(index < 1)
 		index = getOption();
 
