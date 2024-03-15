@@ -22,7 +22,7 @@ void printSplash()
 
 int getOption()
 {
-	int choice;
+	int choice = 0;
 	scanf("%d", &choice);
 	getchar();
 	return choice;
@@ -103,9 +103,11 @@ void handleOption(int choice, FrameNode** head)
         break;
 
     case 7:
-        play(*head);
+    {
+        if(*head && checkValidPaths(*head))
+            play(*head);
         break;
-
+    }
     case 8:
         SaveProject(*head);
         break;

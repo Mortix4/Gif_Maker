@@ -2,7 +2,6 @@
 #include "ProjectFunctions.h"
 
 
-
 void CreateProject(FrameNode** head)
 {
 	freeList(head);
@@ -87,4 +86,31 @@ void SaveProject(FrameNode* head)
     fclose(file);
 
     printf("Project saved successfully!\n");
+}
+
+int checkValidPaths(FrameNode* head)
+{
+    FrameNode* current = head;
+    while (current)
+    {
+        if (!isValidPath(current->frame->path))
+            return 0; // Return false if any path is invalid
+        current = current->next;
+    }
+    return 1; // Return true if all paths are valid
+}
+
+int isValidPath(const char* path) 
+{
+    if (path == NULL || strlen(path) == 0) 
+        return 0;
+
+    // Didn't Work so i commented it
+    //#ifdef _WIN32
+    //    // For Windows systems
+    //    return PathFileExists(path); // Windows API
+    //#else
+    //    // For Unix... systems
+    //    return access(path, F_OK) != -1; // POSIX access function
+    //#endif
 }

@@ -3,7 +3,7 @@
 #include "MainFunctions.h"
 #include <string.h>
 
-
+// Init Function
 FrameNode* createFrameNode(char* name, unsigned int duration, char* path)
 {
     FrameNode* fn = (FrameNode*)malloc(sizeof(FrameNode));
@@ -33,32 +33,6 @@ FrameNode* createFrameNode(char* name, unsigned int duration, char* path)
     fn->next = NULL;
 	//printf("\nFrame Was Added Successfully!\n");
     return fn;
-}
-
-// 6
-void list_frames(FrameNode* head)
-{
-	printf("Name        Duration<ms>    Path\n");
-	printf("----------------------------------------\n");
-
-	if (head == NULL)
-		return;
-
-	FrameNode* tmp = head;
-
-	while (tmp)
-	{
-		if (tmp->frame)
-		{
-			printf("%-12s %-14d %s\n", tmp->frame->name, tmp->frame->duration, tmp->frame->path);
-		}
-		else
-		{
-			printf("Invalid frame data.\n");
-		}
-
-		tmp = tmp->next;
-	}
 }
 
 // 1
@@ -115,100 +89,6 @@ void add_new_frame(FrameNode** head)
 	}
 }
 
-FrameNode* findFrameNodeByName(FrameNode* head, char* name)
-{
-	if (head == NULL || name == NULL)
-	{
-		printf("The Head And The Name Shouldn't Be Empty!!\n");
-		return NULL;
-	}
-
-	FrameNode* curr = head;
-	while (curr)
-	{
-		if (curr->frame && strcmp(curr->frame->name, name) == 0)
-			return curr;
-		curr = curr->next;
-	}
-	return NULL;
-}
-
-FrameNode* findFrameNodeByIndex(FrameNode* head, int index)
-{
-	if (head == NULL)
-	{
-		printf("Head Is Empty!!\n");
-		return NULL;
-	}
-
-	int currentIndex = 1;
-	FrameNode* current = head;
-
-	while (current)
-	{
-		if (currentIndex == index)
-			return current;
-
-		currentIndex++;
-		current = current->next;
-	}
-
-	return NULL;
-}
-
-// 4 Main Function
-void changeFrameDuration(FrameNode* curr, int duration)
-{
-	curr->frame->duration = duration;
-}
-
-// 4
-void handleChangeFrameDuration(FrameNode* head)
-{
-	char name[LEN] = { 0 };
-	int duration = 0;
-
-	while (duration < 1)
-	{
-		printf("Enter New Duration For The Frame: ");
-		duration = getOption();
-	}
-
-	printf("Enter Name Of The Frame: ");
-	myFgets(name, LEN);
-
-	FrameNode* curr = findFrameNodeByName(head, name);
-	if (!curr)
-	{
-		printf("The Wanted Frame Wasn't Found!\n");
-		return;
-	}
-	changeFrameDuration(curr, duration);
-}
-
-// 5
-void handleChangeAllFramesDuration(FrameNode* head)
-{
-	int duration = 0;
-	while (duration < 1)
-	{
-		printf("Enter Duration For All Frames: ");
-		int duration = getOption();
-	}
-	changeAllDuration(head, duration);
-}
-
-// 5 Main Function
-void changeAllDuration(FrameNode* head, int duration)
-{
-	FrameNode* curr = head;
-	while (curr)
-	{
-		changeFrameDuration(curr, duration);
-		curr = curr->next;
-	}
-}
-
 // 2
 void handleRemoveFrame(FrameNode** head)
 {
@@ -226,6 +106,7 @@ void handleRemoveFrame(FrameNode** head)
 	removeFrame(head, name);
 }
 
+// sub-2
 void removeFrame(FrameNode** head, char* name)
 {
 	FrameNode* p = *head;
@@ -268,7 +149,7 @@ void handleChangeFrameIndex(FrameNode** head)
 	}
 
 	printf("Enter The new index in the movie you wish to place the frame in: ");
-	while(index < 1)
+	while (index < 1)
 		index = getOption();
 
 	FrameNode* dest = findFrameNodeByIndex(*head, index);
@@ -281,55 +162,249 @@ void handleChangeFrameIndex(FrameNode** head)
 	swapNodes(head, src, dest);
 }
 
+// sub-3.0
 void swapNodes(FrameNode** head, FrameNode* node1, FrameNode* node2)
 {
 	// If either node is NULL or they are the same node
 	if (*head == NULL || node1 == NULL || node2 == NULL || node1 == node2)
 		return;
 
-	// Find the previous of both nodes
-	FrameNode* prev1 = NULL;
-	FrameNode* prev2 = NULL;
-	FrameNode* current = *head;
-
-	while (current != NULL && (prev1 == NULL || prev2 == NULL))
+	// If node1 is the head node
+	if (*head == node1)
 	{
-		if (current->next == node1)
-		{
-			prev1 = current;
-		}
+		FrameNode* prev2 = NULL;
+		FrameNode* current = *head;
 
-		if (current->next == node2)
+		while (current != NULL && current != node2)
 		{
 			prev2 = current;
+			current = current->next;
 		}
 
+		// If node2 is not found in the list -> exit
+		if (current == NULL)
+			return;
+
+		// Update the head node
+		*head = node2;
+
+		FrameNode* temp = node1->next;
+		node1->next = node2->next;
+		node2->next = temp;
+
+		if (prev2 != NULL)
+			prev2->next = node1;
+
+		// Ensure the next pointer of the last node points to NULL
+		FrameNode* lastNode = node2;
+		while (lastNode->next != NULL)
+		{
+			lastNode = lastNode->next;
+		}
+		lastNode->next = NULL;
+	}
+	// If node2 is the head node
+	else if (*head == node2)
+	{
+		FrameNode* prev1 = NULL;
+		FrameNode* current = *head;
+
+		while (current != NULL && current != node1)
+		{
+			prev1 = current;
+			current = current->next;
+		}
+
+		// If node1 is not found in the list -> exit
+		if (current == NULL)
+			return;
+
+		// Update the head node
+		*head = node1;
+
+		FrameNode* temp = node1->next;
+		node1->next = node2->next;
+		node2->next = temp;
+
+		if (prev1 != NULL)
+			prev1->next = node2;
+
+		// Ensure the next pointer of the last node points to NULL
+		FrameNode* lastNode = node1;
+		while (lastNode->next != NULL)
+		{
+			lastNode = lastNode->next;
+		}
+		lastNode->next = NULL;
+	}
+	else
+	{
+		// Find the previous of both nodes
+		FrameNode* prev1 = NULL;
+		FrameNode* prev2 = NULL;
+		FrameNode* current = *head;
+
+		while (current != NULL && (prev1 == NULL || prev2 == NULL))
+		{
+			if (current->next == node1)
+			{
+				prev1 = current;
+			}
+			if (current->next == node2)
+			{
+				prev2 = current;
+			}
+
+			current = current->next;
+		}
+
+		// If any of the nodes is not found in the list -> exit
+		if (prev1 == NULL || prev2 == NULL)
+			return;
+
+		// Swap nodes
+		prev1->next = node2;
+		prev2->next = node1;
+
+		FrameNode* temp = node1->next;
+		node1->next = node2->next;
+		node2->next = temp;
+
+		// Ensure the next pointer of the last node points to NULL
+		FrameNode* lastNode = node1;
+		while (lastNode->next != NULL)
+		{
+			lastNode = lastNode->next;
+		}
+		lastNode->next = NULL;
+	}
+}
+
+// sub-3.1
+FrameNode* findFrameNodeByName(FrameNode* head, char* name)
+{
+	if (head == NULL || name == NULL)
+	{
+		printf("The Head And The Name Shouldn't Be Empty!!\n");
+		return NULL;
+	}
+
+	FrameNode* curr = head;
+	while (curr)
+	{
+		if (curr->frame && strcmp(curr->frame->name, name) == 0)
+			return curr;
+		curr = curr->next;
+	}
+	return NULL;
+}
+
+// sub-3.2
+FrameNode* findFrameNodeByIndex(FrameNode* head, int index)
+{
+	if (head == NULL)
+	{
+		printf("Head Is Empty!!\n");
+		return NULL;
+	}
+
+	int currentIndex = 1;
+	FrameNode* current = head;
+
+	while (current)
+	{
+		if (currentIndex == index)
+			return current;
+
+		currentIndex++;
 		current = current->next;
 	}
 
-	// If any of the nodes is not found in the list -> exit
-	if (prev1 == NULL || prev2 == NULL)
-		return;
-
-
-	// Swap nodes
-	if (prev1 != NULL)
-		prev1->next = node2;
-
-	else
-		*head = node2;
-
-	if (prev2 != NULL)
-		prev2->next = node1;
-
-	else
-		*head = node1;
-
-	FrameNode* temp = node1->next;
-	node1->next = node2->next;
-	node2->next = temp;
+	return NULL;
 }
 
+// 4
+void handleChangeFrameDuration(FrameNode* head)
+{
+	char name[LEN] = { 0 };
+	int duration = 0;
+
+	while (duration < 1)
+	{
+		printf("Enter New Duration For The Frame: ");
+		duration = getOption();
+	}
+
+	printf("Enter Name Of The Frame: ");
+	myFgets(name, LEN);
+
+	FrameNode* curr = findFrameNodeByName(head, name);
+	if (!curr)
+	{
+		printf("The Wanted Frame Wasn't Found!\n");
+		return;
+	}
+	changeFrameDuration(curr, duration);
+}
+
+// sub-4
+void changeFrameDuration(FrameNode* curr, int duration)
+{
+	curr->frame->duration = duration;
+}
+
+// 5
+void handleChangeAllFramesDuration(FrameNode* head)
+{
+	int duration = 0;
+	do
+	{
+		printf("Enter Duration For All Frames: ");
+		duration = getOption();
+
+	} while (duration < 1);
+
+	changeAllDuration(head, duration);
+}
+
+// sub-5
+void changeAllDuration(FrameNode* head, int duration)
+{
+	FrameNode* curr = head;
+	while (curr)
+	{
+		changeFrameDuration(curr, duration);
+		curr = curr->next;
+	}
+}
+
+// 6
+void list_frames(FrameNode* head)
+{
+	printf("Name        Duration<ms>    Path\n");
+	printf("----------------------------------------\n");
+
+	if (head == NULL)
+		return;
+
+	FrameNode* tmp = head;
+
+	while (tmp)
+	{
+		if (tmp->frame)
+		{
+			printf("%-12s %-14d %s\n", tmp->frame->name, tmp->frame->duration, tmp->frame->path);
+		}
+		else
+		{
+			printf("Invalid frame data.\n");
+		}
+
+		tmp = tmp->next;
+	}
+}
+
+// Free Function
 void freeList(FrameNode** head)
 {
 	FrameNode* curr = *head;

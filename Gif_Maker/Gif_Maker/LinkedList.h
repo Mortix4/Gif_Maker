@@ -29,18 +29,18 @@ typedef struct FrameNode
 
 
 FrameNode* createFrameNode(char* name, unsigned int duration, char* path);
-void list_frames(FrameNode* head);
 void add_new_frame(FrameNode** head);
-FrameNode* findFrameNodeByName(FrameNode* head, char* name);
-FrameNode* findFrameNodeByIndex(FrameNode* head, int index);
-void changeFrameDuration(FrameNode* curr, int duration);
-void handleChangeFrameDuration(FrameNode* head);
-void handleChangeAllFramesDuration(FrameNode* head);
-void handleChangeFrameIndex(FrameNode** head);
 void handleRemoveFrame(FrameNode** head);
-void changeAllDuration(FrameNode* head, int duration);
 void removeFrame(FrameNode** head, char* name);
+void handleChangeFrameIndex(FrameNode** head);
 void swapNodes(FrameNode** head, FrameNode* node1, FrameNode* node2);
+FrameNode* findFrameNodeByIndex(FrameNode* head, int index);
+FrameNode* findFrameNodeByName(FrameNode* head, char* name);
+void handleChangeFrameDuration(FrameNode* head);
+void changeFrameDuration(FrameNode* curr, int duration);
+void handleChangeAllFramesDuration(FrameNode* head);
+void changeAllDuration(FrameNode* head, int duration);
+void list_frames(FrameNode* head);
 void freeList(FrameNode** head);
 
 #endif
